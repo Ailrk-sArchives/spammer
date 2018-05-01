@@ -1,6 +1,9 @@
 
 # Created by https://www.gitignore.io/api/venv,python,virtualenv
 
+### mail_list anf text.txt
+*.txt
+
 ### Python ###
 # Byte-compiled / optimized / DLL files
 __pycache__/
