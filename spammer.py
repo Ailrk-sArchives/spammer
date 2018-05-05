@@ -46,20 +46,20 @@ class Spammer:
         self.subject = str(subject)
 
     def send(self):
-        self._set_msg()
+        self.__set_msg()
 
-        if self._prerequisite_checking():
-            self._send_msg()
+        if self.__prerequisite_checking():
+            self.__send_msg()
         else:
             print('Spammer need infomation with integrity')
             sys.exit(1)
 
-    def _set_msg(self):
+    def __set_msg(self):
        	self.msg['Subject'] = email.header.Header(self.subject, 'utf-8')
         self.msg['From'] = email.header.Header(self._from,'utf-8')
         self.msg['To'] = email.header.Header(','.join(self._to_list), 'utf-8')
 
-    def _send_msg(self):
+    def __send_msg(self):
         try:
             s = smtplib.SMTP('smtp.gmail.com', 587)
             s.ehlo()
@@ -73,7 +73,7 @@ class Spammer:
             raise e
             print ('failed to send')
 
-    def _prerequisite_checking(self):
+    def __prerequisite_checking(self):
         """ checking if the spam is ready to go """
         if self.mail_pwd != '' and self.mail_user != '' and self.msg != None \
                 and self._from != '' and  self.subject != '' and self._to_list:
@@ -90,7 +90,7 @@ class Manager:
     mail_pwd = ''
 
     def __init__(self):
-        self._check_args()
+        self.__check_args()
         # try to open mail_list and text
         try:
             with open(self.list_path, 'r') as list_fp, \
@@ -126,14 +126,14 @@ class Manager:
         modify = input('modify? ')
 
         if modify:
-            if self._ask('modify MAIL_USER?'):self._update_env_var('MAIL_USER')
-            if self._ask('modify MAIL_PWD?'):self._update_env_var('MAIL_PWD')
+            if self.__ask('modify MAIL_USER?'):self.__update_env_var('MAIL_USER')
+            if self.__ask('modify MAIL_PWD?'):self.__update_env_var('MAIL_PWD')
             
         else:
             print('Good Luck')
         sys.exit(0)
 
-    def _ask(self, msg):
+    def __ask(self, msg):
         while True:
             ans = input(msg + '(y/n)') 
             if ans == 'y':
@@ -143,18 +143,18 @@ class Manager:
             else:
                 print('please answer \'y\' or \'n\'')
 
-    def _update_env_var(self, var):
+    def __update_env_var(self, var):
         os.environ[var] = input('> ')
             
         
-    def _check_args(self):
+    def __check_args(self):
         try:
             opts, args = getopt.getopt(sys.argv[1:], 'hcl:t:', ['help','config', \
                     'list_path', 'text_path'])
 
             for o, a in opts:
                 if o in ('-h', '--help'):
-                    self._usage()
+                    self.__usage()
                 elif o in ('-c', '--config'):
                     self.configruation()       
                 elif o in ('-l', '--list_path'):
@@ -168,7 +168,7 @@ class Manager:
             print(e)
     
     @staticmethod
-    def _usage():
+    def __usage():
         print('SPAMMER ---The utimate business booster')
         print('usage:')
         print('     spammer [options] <args>')
