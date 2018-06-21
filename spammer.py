@@ -24,9 +24,6 @@ class Spammer:
 #            self.mail_user = os.environ['MAIL_USER']
 #            self.mail_pwd = os.environ['MAIL_PWD']
 
-            self.mail_user = "jimmy123good@gmail.com"
-            self.mail_pwd = "jimmyyao1998"
-
         except KeyError:
             print('KeyError. Make sure you have MAIL_USER and MAIL_PWD as environmental variables')
     
