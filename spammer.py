@@ -21,8 +21,8 @@ class Spammer:
     def __init__(self, msg='', _to_list=[], subject=''):
         """ get MAIL_USER and MAIL_PWD from env """
         try:
-#            self.mail_user = os.environ['MAIL_USER']
-#            self.mail_pwd = os.environ['MAIL_PWD']
+            self.mail_user = os.environ['MAIL_USER']
+            self.mail_pwd = os.environ['MAIL_PWD']
 
         except KeyError:
             print('KeyError. Make sure you have MAIL_USER and MAIL_PWD as environmental variables')
